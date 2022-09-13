@@ -34,3 +34,9 @@ async function getUserOrFail(login: TypeNewUserData) {
 
   return user;
 };
+
+export async function findUserById(id: number) {
+  const user = await authRepository.findById(id);
+  if (!user) throw { type: "not_found" };
+  return user;
+}

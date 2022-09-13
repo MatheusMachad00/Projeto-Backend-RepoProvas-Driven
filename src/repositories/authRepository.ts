@@ -9,3 +9,8 @@ export async function checkEmail(email: string) {
 export async function createUser(user: TypeNewUserData) {
   await prisma.user.create({ data: user });
 };
+
+export async function findById(id: number) {
+  const result = await prisma.user.findFirst({ where: { id } });
+  return result;
+}
