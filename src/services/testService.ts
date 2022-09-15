@@ -15,3 +15,12 @@ export async function createTest(data: any) {
   await testRepository.createTest(objData);
 };
 
+export async function getTestByDiscipline() {
+  const result = await testRepository.getTestsByDiscipline();
+  return result;
+};
+
+export async function getTestByTeacher() {
+  const result = await testRepository.getTestsByTeacher();
+  return result;
+};
