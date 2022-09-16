@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import * as authService from '../services/authService'
+import { TypeNewUserData } from '../types/userTypes';
 
 
 export async function signup(req: Request, res: Response) {
@@ -9,7 +10,7 @@ export async function signup(req: Request, res: Response) {
 };
 
 export async function login(req: Request, res: Response) {
-  const loginData = req.body;
-  const result = await authService.login(loginData);
+  const {email, password} = req.body;
+  const result = await authService.login({email, password});
   res.send({ token: result }).status(200);
 };

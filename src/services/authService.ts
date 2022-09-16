@@ -17,9 +17,10 @@ export async function signup(signupData: TypeNewUserData) {
 
 export async function login(login: TypeNewUserData) {
   const KEY_JWT = process.env.JWT_SECRET;
-  const userData = await getUserOrFail(login);
-  console.log(userData)
-  const token = jwt.sign(userData, String(KEY_JWT));
+  const data = login;
+  const {id, email, password} = await getUserOrFail(data);
+  console.log("sou o retorno da função getUserOrFail", {id, email, password})
+  const token = jwt.sign({id, email, password}, String(KEY_JWT));
 
 
   return token;
@@ -28,7 +29,8 @@ export async function login(login: TypeNewUserData) {
 async function getUserOrFail(login: TypeNewUserData) {
   const user = await authRepository.checkEmail(login.email);
   if (!user) throw { type: "unauthorized" };
-
+  
+  console.log("sou user",user)
   const isPasswordValid = bcrypt.compareSync(login.password, user.password);
   if (!isPasswordValid) throw { type: "unauthorized" };
 
