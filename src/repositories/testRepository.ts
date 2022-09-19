@@ -6,21 +6,11 @@ export async function createTest(testData: TypeNewTestData) {
   await prisma.test.create({ data: testData });
 };
 
-/* export async function checkTableTeacherDisciplines(disciplineId: number) {
+export async function checkTableTeacherDisciplines(disciplineId: number) {
   const result = await prisma.teacherDiscipline.findFirst({ where: { disciplineId } })
-  const result2 = await prisma.$queryRaw`SELECT * FROM "teacherDisciplines" WHERE "disciplineId" = 1`
-  
-  const result = await connection.query(
-    `SELECT * FROM "teacherDisciplines" WHERE "disciplineId" = $1`,
-    [disciplineId])
-
-    console.log(disciplineId)
-  console.log(`eu sou a resposta do repository ${result}`)
-  console.log(result.id)
-
   return result;
 };
- */
+
 
 export async function getTestsByDiscipline() {
   const result = prisma.term.findMany({
